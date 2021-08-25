@@ -9,7 +9,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Features\Operations\Commands\" />
+		<Folder Include="Features\Operations\Commands\DeleteOperation\" />
+		<Folder Include="Features\Operations\Commands\UpdateOperation\" />
 	</ItemGroup>
 
 	<ItemGroup>

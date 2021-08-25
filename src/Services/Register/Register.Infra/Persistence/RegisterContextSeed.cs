@@ -35,7 +35,7 @@ namespace Register.Infra.Data
                 new UserConfiguration() {Name = "joao",
                     Email = "joao@gmail.com",
                     InitialBalance = 350,
-                    UserId = Guid.Parse("be0ad3ba-7201-47b4-a71e-b2c65957c3f7") }
+                    Id = Guid.Parse("be0ad3ba-7201-47b4-a71e-b2c65957c3f7") }
             };
         }
 
