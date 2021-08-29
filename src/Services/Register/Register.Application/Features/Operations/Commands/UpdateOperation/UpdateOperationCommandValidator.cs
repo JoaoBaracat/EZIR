@@ -1,12 +1,16 @@
 ﻿using FluentValidation;
 using System;
 
-namespace Register.Application.Features.Operations.Commands.CreateOperation
+namespace Register.Application.Features.Operations.Commands.UpdateOperation
 {
-    public class CreateOperationCommandValidator : AbstractValidator<CreateOperationCommand>
+    public class CreateOperationCommandValidator : AbstractValidator<UpdateOperationCommand>
     {
         public CreateOperationCommandValidator()
         {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull();
+
             RuleFor(x => x.UserId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();

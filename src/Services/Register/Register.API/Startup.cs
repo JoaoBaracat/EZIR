@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Register.API.Configurations;
 using Register.Application;
 using Register.Infra;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Register.API
 {
@@ -23,25 +25,26 @@ namespace Register.API
         {
             services.AddApplicationServices();
             services.AddInfrastructureServices(Configuration);
-
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Register.API", Version = "v1" });
-            });
+            services.AddControllersConfiguration();
+
+            services.AddSwaggerConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Register.API v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction =>
+            {
+                ConfigureSwaggerUIActions(apiVersionDescriptionProvider, setupAction);
+            });
 
             app.UseRouting();
 
@@ -51,6 +54,20 @@ namespace Register.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void ConfigureSwaggerUIActions(IApiVersionDescriptionProvider apiVersionDescriptionProvider, SwaggerUIOptions setupAction)
+        {
+            foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+            {
+                setupAction.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                    description.GroupName.ToUpperInvariant());
+            }
+            setupAction.DefaultModelExpandDepth(2);
+            setupAction.DefaultModelRendering(Swashbuckle.AspNetCore.SwaggerUI.ModelRendering.Model);
+            setupAction.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+            setupAction.EnableDeepLinking();
+            setupAction.DisplayOperationId();
         }
     }
 }

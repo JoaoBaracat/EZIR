@@ -44,9 +44,17 @@ namespace Register.Infra.Data
             return new List<OperationType>
             {
                 new OperationType() {Id = Guid.NewGuid(),
-                    Description = "Buy" },
+                    Description = "Stock" },
                 new OperationType() {Id = Guid.NewGuid(),
-                    Description = "Sell" }
+                    Description = "ETF" },
+                new OperationType() {Id = Guid.NewGuid(),
+                    Description = "REIT" },
+                new OperationType() {Id = Guid.NewGuid(),
+                    Description = "BDR" },
+                new OperationType() {Id = Guid.NewGuid(),
+                    Description = "Mini-Index" },
+                new OperationType() {Id = Guid.NewGuid(),
+                    Description = "Mini-Dolar" }
             };
         }
     }

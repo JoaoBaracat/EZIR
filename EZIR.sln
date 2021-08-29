@@ -21,11 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Register", "Register", "{0C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Register.API", "src\Services\Register\Register.API\Register.API.csproj", "{C81C385F-4248-48D7-9AFE-D75FD3D86D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Register.Application", "src\Services\Register\Register.Application\Register.Application.csproj", "{F28210EA-1CF8-40C9-A231-FA031287E498}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Register.Application", "src\Services\Register\Register.Application\Register.Application.csproj", "{F28210EA-1CF8-40C9-A231-FA031287E498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Register.Domain", "src\Services\Register\Register.Domain\Register.Domain.csproj", "{1B807E73-F5FE-433E-A968-B5AE5165C775}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Register.Domain", "src\Services\Register\Register.Domain\Register.Domain.csproj", "{1B807E73-F5FE-433E-A968-B5AE5165C775}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Register.Infra", "src\Services\Register\Register.Infra\Register.Infra.csproj", "{D2DE8536-7D16-47F4-B942-D973023CE62E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Register.Infra", "src\Services\Register\Register.Infra\Register.Infra.csproj", "{D2DE8536-7D16-47F4-B942-D973023CE62E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{13528DED-926C-460E-B66A-6DA0E99405E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,7 @@ Global
 		{F28210EA-1CF8-40C9-A231-FA031287E498} = {0C223A1F-99EB-434C-8629-A4CF0434A781}
 		{1B807E73-F5FE-433E-A968-B5AE5165C775} = {0C223A1F-99EB-434C-8629-A4CF0434A781}
 		{D2DE8536-7D16-47F4-B942-D973023CE62E} = {0C223A1F-99EB-434C-8629-A4CF0434A781}
+		{13528DED-926C-460E-B66A-6DA0E99405E8} = {0C223A1F-99EB-434C-8629-A4CF0434A781}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C1991D6-C407-4145-BAEB-871BEC828327}

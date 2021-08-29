@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Register.Domain.Enums
 {
     public static class CostsTypeEnum
     {
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CostsType
         {
             [Description("Brokerage + Fees")]

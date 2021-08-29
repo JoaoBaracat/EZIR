@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Register.API</name>
+    </assembly>
+    <members>
+        <member name="M:Register.API.Controllers.OperationsController.GetOperationByIdAsync(System.Guid)">
+            <summary>
+            Get a operation
+            </summary>
+            <param name="id">The id of the operation</param>
+            <returns>An ActionResult of type Operation</returns>
+            <response code="404">Operation not found</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationsController.CreateOperationAsync(Register.Application.Features.Operations.Commands.CreateOperation.CreateOperationCommand)">
+            <summary>
+            Create a operation
+            </summary>
+            <param name="command">The create operation command object</param>
+            <returns>An ActionResult of type Operation</returns>
+            <response code="404">Operation not found</response>
+            <response code="400">The command object did not pass the validation</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationsController.UpdateOperationAsync(Register.Application.Features.Operations.Commands.UpdateOperation.UpdateOperationCommand,System.Guid)">
+            <summary>
+            Update a operation
+            </summary>
+            <param name="command">The update operation command object</param>
+            <param name="id">The id of the operation to be updated</param>
+            <response code="404">Operation not found</response>
+            <response code="400">The command object did not pass the validation</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationsController.DeleteOperationAsync(System.Guid)">
+            <summary>
+            Delete a operation
+            </summary>
+            <param name="id">The id of the operation to be deleted</param>
+            <response code="404">Operation not found</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationTypesController.GetOperationTypeByIdAsync(System.Guid)">
+            <summary>
+            Get a operation type
+            </summary>
+            <param name="id">The id of the operation type</param>
+            <returns>An ActionResult of type OperationType</returns>
+            <response code="404">Operation type not found</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationTypesController.CreateOperationTypeAsync(Register.Application.Features.OperationTypes.Commands.CreateOperationType.CreateOperationTypeCommand)">
+            <summary>
+            Create a operation type
+            </summary>
+            <param name="command">The create operation type command object</param>
+            <returns>An ActionResult of Guid returning the id of the Operation Type</returns>
+            <response code="404">Operation type not found</response>
+            <response code="400">The command object did not pass the validation</response>
+        </member>
+        <member name="M:Register.API.Controllers.OperationTypesController.UpdateOperationTypeAsync(Register.Application.Features.OperationTypes.Commands.UpdateOperationType.UpdateOperationTypeCommand,System.Guid)">
+            <summary>
+            Update a operation type
+            </summary>
+            <param name="command">The update operation type command object</param>
+            <param name="id">The id of the operation type to be updated</param>
+            <response code="404">Operation type not found</response>
+            <response code="400">The command object did not pass the validation</response>
+        </member>
+    </members>
+</doc>

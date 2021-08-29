@@ -6,10 +6,13 @@ using static Register.Domain.Enums.BrokerageTypeEnum;
 using static Register.Domain.Enums.CostsTypeEnum;
 using static Register.Domain.Enums.OrderTypeEnum;
 
-namespace Register.Application.Features.Operations.Commands.CreateOperation
+namespace Register.Application.Features.Operations.Commands.UpdateOperation
 {
-    public class CreateOperationCommand : IRequest<Guid>
+    public class UpdateOperationCommand : IRequest
     {
+        [Required]
+        public Guid Id { get; set; }
+
         [Required]
         public Guid UserId { get; set; }
 

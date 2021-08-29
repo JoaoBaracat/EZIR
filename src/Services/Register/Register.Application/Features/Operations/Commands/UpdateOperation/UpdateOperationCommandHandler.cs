@@ -4,21 +4,20 @@ using Microsoft.Extensions.Logging;
 using Register.Applicatioin.Contracts.Persistence;
 using Register.Application.Exceptions;
 using Register.Domain.Entities;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Register.Application.Features.Operations.Commands.CreateOperation
+namespace Register.Application.Features.Operations.Commands.UpdateOperation
 {
-    public class CreateOperationCommandHandler : IRequestHandler<CreateOperationCommand, Guid>
+    public class UpdateOperationCommandHandler : IRequestHandler<UpdateOperationCommand>
     {
         private readonly IOperationRepository _operationRepository;
         private readonly IStockBrokerRepository _stockBrokerRepository;
         private readonly IOperationTypeRepository _operationTypeRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<CreateOperationCommandHandler> _logger;
+        private readonly ILogger<UpdateOperationCommandHandler> _logger;
 
-        public CreateOperationCommandHandler(IOperationRepository operationRepository, IMapper mapper, ILogger<CreateOperationCommandHandler> logger, IStockBrokerRepository stockBrokerRepository, IOperationTypeRepository operationTypeRepository)
+        public UpdateOperationCommandHandler(IOperationRepository operationRepository, IMapper mapper, ILogger<UpdateOperationCommandHandler> logger, IStockBrokerRepository stockBrokerRepository, IOperationTypeRepository operationTypeRepository)
         {
             _operationRepository = operationRepository;
             _mapper = mapper;
@@ -27,8 +26,14 @@ namespace Register.Application.Features.Operations.Commands.CreateOperation
             _operationTypeRepository = operationTypeRepository;
         }
 
-        public async Task<Guid> Handle(CreateOperationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateOperationCommand request, CancellationToken cancellationToken)
         {
+            var operationToUpdate = await _operationRepository.GetByIdAsync(request.Id);
+            if (operationToUpdate is null)
+            {
+                throw new NotFoundException(nameof(Operation), request.Id);
+            }
+
             var stockBroker = await _stockBrokerRepository.GetByIdAsync(request.StockBrokerId);
             if (stockBroker is null)
             {
@@ -41,12 +46,12 @@ namespace Register.Application.Features.Operations.Commands.CreateOperation
                 throw new NotFoundException(nameof(OperationType), request.OperationTypeId);
             }
 
-            var operationToCreate = _mapper.Map<Operation>(request);
-            var newOperation = await _operationRepository.CreateAsync(operationToCreate);
+            _mapper.Map(request, operationToUpdate, typeof(UpdateOperationCommand), typeof(Operation));
+            await _operationRepository.UpdateAsync(operationToUpdate);
 
-            _logger.LogInformation($"Operation {newOperation.Id} was successfully created.");
+            _logger.LogInformation($"Operation {operationToUpdate.Id} was successfully updated.");
 
-            return newOperation.Id;
+            return Unit.Value;
         }
     }
 }
